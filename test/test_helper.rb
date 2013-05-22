@@ -8,9 +8,15 @@ require 'rails/test_help'
 require 'minitest/rails'
 require 'webmock/minitest'
 
-# To add Capybara feature tests add `gem 'minitest-rails-capybara'`
-# to the test group in the Gemfile and uncomment the following:
-# require 'minitest/rails/capybara'
+# If tests are running under JRuby, load the right database configuration
+
+if JRUBY_VERSION
+  configs = YAML.load_file(Rails.root.join('config', 'database.yml'))
+  ActiveRecord::Base.configurations = configs['jruby']
+
+  ActiveRecord::Base.establish_connection(:test)
+  ActiveRecord::Base.default_timezone = :utc
+end
 
 # Use Mocha for mocking/stubbing
 require 'mocha/setup'

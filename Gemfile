@@ -1,12 +1,20 @@
 source 'https://rubygems.org'
-ruby '2.0.0'
 
 gem 'rails-api'
 gem 'rails', '4.0.0.rc1'
 gem 'api-versions', github: 'erichmenge/api-versions'
 
 gem 'puma', '~> 2.0.0'
-gem 'pg'
+
+platforms :ruby do
+  ruby '2.0.0'
+  gem 'pg'
+end
+
+platforms :jruby do
+  ruby '1.9.3'
+  gem 'activerecord-jdbcpostgresql-adapter', '1.3.0.beta1'
+end
 
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'active_model_serializers', '~> 0.7.0'

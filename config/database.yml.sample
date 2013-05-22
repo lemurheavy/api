@@ -22,3 +22,19 @@ production:
   pool: 25
   username: postgres
   password:
+
+# For Travis.
+
+jruby:
+  defaults: &jruby-defaults
+    adapter: jdbcpostgresql
+    database: goodbrews_test
+    pool: 5
+    username: postgres
+    password:
+
+  development:
+    <<: *jruby-defaults
+
+  test:
+    <<: *jruby-defaults
